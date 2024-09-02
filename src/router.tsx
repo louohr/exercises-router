@@ -8,6 +8,20 @@ import { Dashboard } from "./Components/Dashboard";
 import Stats from "./Components/Stats";
 import Settings from "./Components/Settings";
 import NotFound from "./Components/NotFound";
+import { useState } from "react";
+
+// exercise 4
+const LoginApp = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+};
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +56,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
+        // exercise 3
         path: "old-home",
         element: <Navigate to="/home" replace />,
       },
