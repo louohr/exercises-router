@@ -10,6 +10,7 @@ import Settings from "./Components/Settings";
 import NotFound from "./Components/NotFound";
 import Login from "./Components/Login";
 import ProtectedRoute from "./Components/ProtectedRoutes";
+import UserProfile from "./Components/UserProfile";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             element: <Settings />, // /dashboard/settings
           },
         ],
+      },
+      {
+        path: "user/:id",
+        element: <UserProfile />, // route with dynamic parameter
       },
       {
         path: "old-home",
