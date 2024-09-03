@@ -1,8 +1,7 @@
-// router.tsx
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { App } from "./App";
 import Home from "./Components/Home";
-import About from "./Components/About";
+import Services from "./Components/Services";
 import Contact from "./Components/Contact";
 import { Dashboard } from "./Components/Dashboard";
 import Stats from "./Components/Stats";
@@ -11,19 +10,25 @@ import NotFound from "./Components/NotFound";
 import Login from "./Components/Login";
 import ProtectedRoute from "./Components/ProtectedRoutes";
 import UserProfile from "./Components/UserProfile";
+import Navigation from "./Components/Navigation"; // Import the Navigation component
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <>
+        <App />
+        <Navigation /> {/* Add the navigation component */}
+      </>
+    ),
     children: [
       {
         index: true,
         element: <Home />,
       },
       {
-        path: "about",
-        element: <About />,
+        path: "services",
+        element: <Services />,
       },
       {
         path: "contact",
@@ -53,7 +58,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "user/:id",
-        element: <UserProfile />, // route with dynamic parameter
+        element: <UserProfile />, // Route with dynamic parameter
       },
       {
         path: "old-home",
