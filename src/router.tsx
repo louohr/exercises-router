@@ -1,3 +1,4 @@
+// router.js
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { App } from "./App";
 import Home from "./Components/Home";
@@ -10,29 +11,29 @@ import NotFound from "./Components/NotFound";
 import Login from "./Components/Login";
 import ProtectedRoute from "./Components/ProtectedRoutes";
 import UserProfile from "./Components/UserProfile";
-import Navigation from "./Components/Navigation"; // Import the Navigation component
+import Layout from "./Components/Layout"; // Import the Layout component
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <App />
-        <Navigation /> {/* Add the navigation component */}
-      </>
-    ),
+    element: <App />, // Main application wrapper, if needed
     children: [
       {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "services",
-        element: <Services />,
-      },
-      {
-        path: "contact",
-        element: <Contact />,
+        element: <Layout />, // Layout with navigation
+        children: [
+          {
+            index: true,
+            element: <Home />, // Home page, accessible at /
+          },
+          {
+            path: "services",
+            element: <Services />, // Services page
+          },
+          {
+            path: "contact",
+            element: <Contact />, // Contact page
+          },
+        ],
       },
       {
         path: "login",
@@ -62,11 +63,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "old-home",
-        element: <Navigate to="/home" replace />,
+        element: <Navigate to="/" replace />, // Redirect old-home to home
       },
       {
         path: "*",
-        element: <NotFound />,
+        element: <NotFound />, // Catch-all for 404 Not Found
       },
     ],
   },
