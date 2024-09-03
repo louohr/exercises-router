@@ -1,4 +1,3 @@
-// router.js
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { App } from "./App";
 import Home from "./Components/Home";
@@ -11,33 +10,33 @@ import NotFound from "./Components/NotFound";
 import Login from "./Components/Login";
 import ProtectedRoute from "./Components/ProtectedRoutes";
 import UserProfile from "./Components/UserProfile";
-import Layout from "./Components/Layout"; // Import the Layout component
+import Layout from "./Components/Layout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // Main application wrapper, if needed
+    element: <App />,
     children: [
       {
-        element: <Layout />, // Layout with navigation
+        element: <Layout />,
         children: [
           {
             index: true,
-            element: <Home />, // Home page, accessible at /
+            element: <Home />,
           },
           {
             path: "services",
-            element: <Services />, // Services page
+            element: <Services />,
           },
           {
             path: "contact",
-            element: <Contact />, // Contact page
+            element: <Contact />,
           },
         ],
       },
       {
         path: "login",
-        element: <Login />, // Login route
+        element: <Login />,
       },
       {
         path: "dashboard",
