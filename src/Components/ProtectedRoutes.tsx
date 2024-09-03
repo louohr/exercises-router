@@ -1,7 +1,27 @@
-import { Outlet, Navigate } from "react-router-dom";
+// ProtectedRoute.tsx
+import { ReactNode } from "react";
+import { Navigate, useOutletContext } from "react-router-dom";
 
-const ProtectedRoutes = ({ isLoggedIn }) => {
-    return isLoggedIn ? <Outlet/> : Navigate to="/login"/>;
+// Type definition for context
+interface OutletContext {
+  isLoggedIn: boolean;
 }
 
-export default ProtectedRoutes;
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+  // Accessing isLoggedIn state from Outlet context
+  const { isLoggedIn } = useOutletContext<OutletContext>();
+
+  // Redirect to login page if not logged in
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Render children if logged in
+  return <>{children}</>;
+};
+
+export default ProtectedRoute;

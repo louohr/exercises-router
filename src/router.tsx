@@ -1,4 +1,4 @@
-// set up router
+// router.tsx
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { App } from "./App";
 import Home from "./Components/Home";
@@ -8,20 +8,8 @@ import { Dashboard } from "./Components/Dashboard";
 import Stats from "./Components/Stats";
 import Settings from "./Components/Settings";
 import NotFound from "./Components/NotFound";
-import { useState } from "react";
-
-// exercise 4
-const LoginApp = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-};
+import Login from "./Components/Login";
+import ProtectedRoute from "./Components/ProtectedRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -41,10 +29,17 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "login",
+        element: <Login />, // Login route
+      },
+      {
         path: "dashboard",
-        element: <Dashboard />, // Dashboard is the parent route
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ), // Protect dashboard and nested routes
         children: [
-          // Nested routes within Dashboard
           {
             path: "stats",
             element: <Stats />, // /dashboard/stats
@@ -56,14 +51,12 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        // exercise 3
         path: "old-home",
         element: <Navigate to="/home" replace />,
       },
-      // catch all route for unspecified URLs
       {
         path: "*",
-        element: <NotFound />, // display not found for all undefined paths
+        element: <NotFound />,
       },
     ],
   },
