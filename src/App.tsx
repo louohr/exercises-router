@@ -23,7 +23,6 @@ const App = () => {
 
   return (
     <div>
-      <h1>Welcome to the App</h1>
       {/* Buttons to demonstrate login and logout functionality */}
       {!isLoggedIn ? (
         <button onClick={handleLogin}>Login</button>
